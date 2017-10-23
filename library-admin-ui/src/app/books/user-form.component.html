@@ -1,0 +1,27 @@
+<div class="modal fade col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-6 col-sm-offset-3"
+    id="issueToUserModal">
+    <div class="modal-dialogue">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button #closeBtn type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Issue Book</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" #userForm="ngForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                        <label for="userName" class="control-label col-md-2">User Name</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" id="userName" required 
+                                [(ngModel)]="user.name" name="userName" #name="ngModel">                            
+                        </div>                                                                
+                    </div>
+                    <div [hidden]="name.valid || name.pristine"
+                            class="alert alert-danger">
+                        Name is required
+                    </div>   
+                    <button type="submit" class="btn btn-success" [disabled]="!userForm.form.valid">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>    
+</div>

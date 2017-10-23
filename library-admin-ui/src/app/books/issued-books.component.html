@@ -1,0 +1,77 @@
+<div>
+    <h3>{{ pageTitle }}</h3>
+    <div class="alert alert-info" id="successAlert" [hidden]="!successMessage">
+        <a  class="close" (click)="toggleSuccessAlert()">&times;</a>
+        <strong>{{successMessage}}</strong>
+    </div>
+    <div class="alert alert-warning" [hidden]="!errorMessage" id="errorAlert">
+      <a  class="close" (click)="toggleErrorAlert()">&times;</a>
+      <strong>{{errorMessage}}</strong>
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <!-- <th>ISBN</th> -->
+          <th>Title</th>
+          <th>Author</th>
+          <th>Issued To</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let book of issuedBooks'>
+          <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div class="hidden" #currentId>{{book.id}}</div></td>        
+          <td><a href="#bookDetails" (click)='setCurrentBook(currentId.innerHTML)' data-toggle="modal">{{book.title}}</a></td>
+          <td>{{book.author}}</td>
+          <td>{{book.issuedTo}}</td>
+          <td><a class="text-primary" data-toggle="modal" href="#releaseConfirmationModal" 
+            (click)='setCurrentBook(currentId.innerHTML)'><strong>Release</strong></a></td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="modal col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-6 col-sm-offset-3" 
+      id="bookDetails" tabindex="-1">
+        <div class="modal-dialogue">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" >{{currentBook.title}}</h4>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-md-5 col-md-offset-1"><p><strong>ID:</strong> {{currentBook.id}}</p></div>
+                <div class="col-md-4"><p><strong>Author:</strong> {{currentBook.author}}</p></div>
+              </div>
+              <div class="row">
+                <div class="col-md-4 col-md-offset-1"><blockquote><p>{{currentBook.description}}</p></blockquote></div>
+              </div>
+              
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> 
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3"
+        id="releaseConfirmationModal" tabindex="-1">
+        <div class="modal-dialogue">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+              <p>Would you like to release {{currentBook.title}}</p>
+            </div>
+            <div class="modal-footer">
+              <button id="btnYesConfirmYesNo" type="button" class="btn btn-primary" (click)="onBookRelease()"
+                data-dismiss="modal">Yes</button>
+              <button id="btnNoConfirmYesNo" type="button" class="btn btn-default" data-dismiss="modal">No</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>

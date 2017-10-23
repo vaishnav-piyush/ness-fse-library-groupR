@@ -1,0 +1,170 @@
+server:
+  port: 8765
+  server-header: Web
+  error:
+    whitelabel:
+      enabled: false
+  
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    initialInstanceInfoReplicationIntervalSeconds: 40
+    serviceUrl:
+      defaultZone: http://192.168.99.100:8761/eureka/
+  instance:
+    instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    leaseRenewalIntervalInSeconds: 30
+    leaseExpirationDurationInSeconds: 90
+    preferIpAddress: true
+
+ribbon:
+    ServerListRefreshInterval: 1000  
+    ReadTimeout: 60000
+    ConnectTimeout: 60000
+    OkToRetryOnAllOperations: false  
+
+zuul:
+  health:
+    enabled: false
+  ignoredServices: "*"
+  routes:
+    libraryservice:
+      path: /fse/**
+    
+hystrix:
+  command:
+    default:
+      execution.timeout.enabled: false
+      
+      
+logging:
+  level:
+    ROOT: INFO
+    org.springframework.web: INFO
+    com.ctc.ctfs.dss.gatewayservice.filters: DEBUG
+  file: D:/Ness/FullStack/POC/Logs/${spring.application.name}.log
+    
+management:
+  add-application-context-header: false
+
+gatewayserver:
+  cors:
+    origins: http://192.168.99.100:4502
+    methods: OPTIONS,POST
+    allow-credentials: true
+    allow-header: all
+    
+---
+  
+spring:
+  profiles: t9dssa01
+
+server:
+  port: 8765  
+  
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    initialInstanceInfoReplicationIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: http://t9dssa01:8761/eureka/, http://t9dssa02:8761/eureka/
+  instance:
+    hostname: t9dssa01
+    instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    leaseRenewalIntervalInSeconds: 2
+    leaseExpirationDurationInSeconds: 5
+
+ribbon:
+    ServerListRefreshInterval: 1000 
+    EnableZoneAffinity: false 
+    
+zuul:
+  ignoredServices: "*"
+  routes:
+    dashcontroller:
+      path: /dash/**
+    
+hystrix:
+  command:
+    default:
+      execution.timeout.enabled: false
+      
+logging:
+  level:
+    ROOT: DEBUG
+    org.springframework.web: INFO
+    com.ctc.ctfs.dss.gatewayservice.filters: DEBUG
+
+gatewayserver:
+  origins: http://192.168.99.100:4502,http://t9aema01.ctal.ctc:4502
+  
+---
+  
+spring:
+  profiles: t9dssa02
+
+server:
+  port: 8765  
+   
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    initialInstanceInfoReplicationIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: http://t9dssa02:8761/eureka/, http://t9dssa01:8761/eureka/
+  instance:
+    hostname: t9dssa01
+    instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    leaseRenewalIntervalInSeconds: 2
+    leaseExpirationDurationInSeconds: 5
+
+ribbon:
+    ServerListRefreshInterval: 1000 
+  
+zuul:
+  ignoredServices: "*"
+  routes:
+    dashcontroller:
+      path: /dash/**
+
+
+ 
+hystrix:
+  command:
+    default:
+      execution.timeout.enabled: false
+
+logging:
+  level:
+    ROOT: INFO
+    org.springframework.web: INFO
+    
+gatewayserver:
+  origins: http://192.168.99.100:4502,http://t9aema01.ctal.ctc:4502
+  
+    
+---
+spring:
+  profiles: docker
+ 
+server:
+  port: 8765
+ 
+zuul:
+  health:
+    enabled: false
+  ignoredServices: "*"
+  routes:
+    libraryservice:
+      path: /fse/**
+ 
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.99.100:8761/eureka/

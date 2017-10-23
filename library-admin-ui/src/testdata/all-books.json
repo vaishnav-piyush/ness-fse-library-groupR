@@ -1,0 +1,12 @@
+[
+    { 
+        "_id" : "59dca04e1046555723e739b3", 
+        "title" : "T3", 
+        "author" : "Prasanna", 
+        "description" : "D3", 
+        "issueStatus" : "AVAILABLE", 
+        "issuedTo" : "", 
+        "addedDate" : "2017-10-10T10:26:17.897Z",
+        "updatedDate" : "2017-10-10T10:26:17.897Z"
+    }
+]
