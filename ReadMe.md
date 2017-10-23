@@ -1,18 +1,18 @@
 ********************************************************************************
 A) Windows Docker Setup
 ********************************************************************************
-1)	Install the Docker tool box
-2)	Run mvn clean package from outside
-3)	Run java –jar <jarname>
-4)	http://localhost:8080   check working
-5)	Package in docker
-		Run the C:\Users\NRajagopalan\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Docker quickstart
-		https://docs.docker.com/docker-for-windows/  if you need from cmd else do it from docker quickstart
-6)	Spotify method 
-a.	docker ps
-b.	Run mvn install dockerfile:build
-c.	docker run -p 8080:8080 -t springio/gs-spring-boot-docker
-d.	http://192.168.99.100:8080/ 
+	1)	Install the Docker tool box
+	2)	Run mvn clean package from outside
+	3)	Run java –jar <jarname>
+	4)	http://localhost:8080   check working
+	5)	Package in docker
+			Run the C:\Users\NRajagopalan\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Docker quickstart
+			https://docs.docker.com/docker-for-windows/  if you need from cmd else do it from docker quickstart
+	6)	Spotify method 
+		a.	docker ps
+		b.	Run mvn install dockerfile:build
+		c.	docker run -p 8080:8080 -t springio/gs-spring-boot-docker
+		d.	http://192.168.99.100:8080/ 
 ********************************************************************************
 B) Ubuntu Docker Setup
 ********************************************************************************
