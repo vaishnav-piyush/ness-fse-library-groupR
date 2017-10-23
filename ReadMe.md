@@ -6,8 +6,8 @@ A) Windows Docker Setup
 	3)	Run java –jar <jarname>
 	4)	http://localhost:8080   check working
 	5)	Package in docker
-			Run the C:\Users\NRajagopalan\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Docker quickstart
-			https://docs.docker.com/docker-for-windows/  if you need from cmd else do it from docker quickstart
+	Run the C:\Users\NRajagopalan\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Docker quickstart
+	https://docs.docker.com/docker-for-windows/  if you need from cmd else do it from docker quickstart
 	6)	Spotify method 
 		a.	docker ps
 		b.	Run mvn install dockerfile:build
