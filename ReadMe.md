@@ -3,7 +3,7 @@ A) Windows Docker Setup
 ********************************************************************************
 1)	Install the Docker tool box
 2)	Run mvn clean package from outside
-3)	Run java –jar <jarname>
+3)	Run java â€“jar <jarname>
 4)	http://localhost:8080   check working
 5)	Package in docker
 		Run the C:\Users\NRajagopalan\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Docker quickstart
@@ -124,7 +124,3 @@ C) Build and Run UI Image
 
 
 
-
-
-
-https://medium.com/@sunnykay/docker-development-workflow-node-express-mongo-4bb3b1f7eb1e
