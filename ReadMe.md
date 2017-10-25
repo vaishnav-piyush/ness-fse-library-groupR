@@ -58,6 +58,9 @@ Docker command sets:
 	Start Containers: 
 			docker ps -a
 	 		docker start -ai 11cc47339ee1er 
+	docker-compose up
+	docker network ls
+	docker-compose scale discovery-service=2
 ********************************************************************************	
 	Multi container setup for microservices with angularJS and mongo
 ********************************************************************************
@@ -111,11 +114,12 @@ C) Build and Run UI Image
 ****************************************************************************************		
 4) Testing the services are up:
 ****************************************************************************************		
-	1) Check if discovery is started: 	http://192.168.99.100:8765/ 
+	1) Check if discovery is started: 	http://192.168.99.100:8761/ 
 	2) check if library is registered in eureka after starting on random port
 	3) check if the gateay is registerd in discovery : http://192.168.99.100:8761/
 	4) docker logs <> to check the running logs
 	5) http://192.168.99.100:8765/fse/book
+	6) http://dev-fse.service.com:4200/available-books
 ****************************************************************************************	
 
        
