@@ -168,3 +168,26 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://192.168.99.100:8761/eureka/
+---
+spring:
+  profiles: dev
+
+server:
+  port: 8765
+
+zuul:
+  health:
+    enabled: false
+  ignoredServices: "*"
+  routes:
+    libraryservice:
+      path: /fse/**
+    userservice:
+      path: /fse/**
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/

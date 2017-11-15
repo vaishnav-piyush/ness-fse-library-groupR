@@ -10,13 +10,13 @@ import 'rxjs/add/operator/retry';
 @Injectable()
 export class BookService {
   // private _urlGetAllBooks = '../testdata/all-books.json';
-  private _urlGetAllBooks = 'http://192.168.99.100:8765/fse/book';
+  private _urlGetAllBooks = 'http://localhost:8765/fse/book';
   private _urlGetBookById = "../testdata/single-book.json";
-  private _urlUpdateBook = "http://192.168.99.100:8765/fse/book"
-  private _urlCreateBook = "http://192.168.99.100:8765/fse/book";
-  private _urlDeleteBook = "http://192.168.99.100:8765/fse/book";
+  private _urlUpdateBook = "http://localhost:8765/fse/book"
+  private _urlCreateBook = "http://localhost:8765/fse/book";
+  private _urlDeleteBook = "http://localhost:8765/fse/book";
 
-  constructor(private _http : HttpClient) { 
+  constructor(private _http : HttpClient) {
 
   }
 
@@ -52,7 +52,7 @@ export class BookService {
       .do(data => console.log("Deleted book: " + JSON.stringify(data)))
       .catch(this.ErrorHandler);
   }
-  
+
   private ErrorHandler(err: HttpErrorResponse) {
     console.log(err.message);
     return Observable.throw(err);
