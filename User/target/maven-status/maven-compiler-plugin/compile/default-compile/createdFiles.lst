@@ -1,8 +1,0 @@
-com/ness/services/model/UserDTO.class
-com/ness/services/util/PasswordManager.class
-com/ness/services/repository/UserRepository.class
-com/ness/services/service/UserServiceImpl.class
-com/ness/services/service/UserService.class
-com/ness/services/UserController.class
-com/ness/services/model/User.class
-com/ness/services/UserServiceApplication.class
