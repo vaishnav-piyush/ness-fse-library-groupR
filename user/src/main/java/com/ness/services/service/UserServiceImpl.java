@@ -1,6 +1,9 @@
 package com.ness.services.service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import com.ness.services.model.User;
@@ -43,6 +46,15 @@ public class UserServiceImpl implements UserService {
         return userDTOS;
     }
 
+    public UserDTO findByUserName(String username) {
+        final User savedUser = repository.findFirstByUserName(username);
+        if (savedUser == null) {
+            return null;
+        }
+        return new UserDTO(savedUser.getFirstName(), savedUser.getLastName(), savedUser.getRoleId() == 1,
+                savedUser.getUserName(), savedUser.getPassword());
+    }
+
     private User mapUserDTOToUser(UserDTO userDTO) {
         User user = new User();
         user.setFirstName(userDTO.getFirstName());
@@ -50,6 +62,8 @@ public class UserServiceImpl implements UserService {
         user.setRoleId(userDTO.getAdmin() ? 1 : 2);
         user.setUserName(userDTO.getUserName());
         user.setPassword(PasswordManager.encrypt(userDTO.getPassword()));
+        user.setCreatedDate(new Date(Calendar.getInstance().getTime().getTime()));
+        user.setUpdatedDate(new Date(Calendar.getInstance().getTime().getTime()));
         return user;
     }
 

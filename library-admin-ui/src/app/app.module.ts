@@ -10,22 +10,26 @@ import { IssuedBooksComponent } from "./books/issued-books.component";
 import { UserFormComponent } from "./books/user-form.component";
 import { FormsModule } from "@angular/forms";
 import { NewBookComponent } from "./books/new-book.component";
+import {RegisterUserComponent} from "./user/register-user.component";
+import {UserService} from "./user/user.service";
 @NgModule({
   declarations: [
     AppComponent,
-    AvailableBooksComponent, 
-    IssuedBooksComponent, 
+    AvailableBooksComponent,
+    IssuedBooksComponent,
     UserFormComponent,
-    NewBookComponent
+    NewBookComponent,
+    RegisterUserComponent
   ],
   imports: [
-    BrowserModule, 
+    BrowserModule,
     HttpClientModule,
-    AppRoutes, 
+    AppRoutes,
     FormsModule
   ],
   providers: [
-    BookService
+    BookService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

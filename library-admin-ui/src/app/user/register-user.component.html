@@ -1,0 +1,56 @@
+<form class="form-horizontal" #registerUserForm="ngForm"
+  (ngSubmit)="onSubmit()" [hidden]="submitted">
+  <fieldset>
+    <legend>Register User Details</legend>
+    <div class="form-group">
+      <label for="userName" class="col-lg-2 control-label">User name</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="userName" name="userUserName"
+          placeholder="User name" required [(ngModel)]="user.userName">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="userPassword" class="col-lg-2 control-label">Password</label>
+      <div class="col-lg-10">
+        <input type="password" class="form-control" id="userPassword" name="userPassword"
+               placeholder="Password" required [(ngModel)]="user.password">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="userFirstName" class="col-lg-2 control-label">First Name</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="userFirstName" name="userFirstName"
+          placeholder="First name" required [(ngModel)]="user.firstName">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="userLastName" class="col-lg-2 control-label">Last Name</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="userLastName" name="userLastName"
+               placeholder="Last name" required [(ngModel)]="user.lastName">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="userAdmin" class="col-lg-2 control-label">Create as administrator</label>
+      <div class="col-lg-10">
+        <input type="checkbox" class="form-control" id="userAdmin" name="userAdmin"
+                [(ngModel)]="user.admin">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="reset" class="btn btn-default">Reset</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!registerUserForm.form.valid">Submit</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+<div class="alert alert-warning" [hidden]="!errorMessage" id="errorAlert">
+  <a href="/register-user" class="close">&times;</a>
+  <p>{{errorMessage}}</p>
+</div>
+<div id="successAlert" [hidden]="!successMessage" >
+  <a href="/register-user" class="close">&times;</a>
+  <p>{{successMessage}}</p>
+</div>
+

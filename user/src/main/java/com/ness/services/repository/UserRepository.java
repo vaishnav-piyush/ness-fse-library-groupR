@@ -1,6 +1,7 @@
 package com.ness.services.repository;
 
 import com.ness.services.model.User;
+import com.ness.services.model.UserDTO;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -8,5 +9,5 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface UserRepository extends CrudRepository<User, Integer> {
 
-
+    User findFirstByUserName(String username);
 }

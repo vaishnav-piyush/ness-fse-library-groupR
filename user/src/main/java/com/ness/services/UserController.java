@@ -8,7 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,7 +28,7 @@ public class UserController
     
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    UserDTO createUser(@RequestBody UserDTO userDto) {
+    UserDTO createUser(@RequestBody @Valid UserDTO userDto) {
         LOGGER.info("Creating a new user entry with information: {}", userDto);
         UserDTO created = service.create(userDto);
         LOGGER.info("Created a new user entry with information: {}", created);
