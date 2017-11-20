@@ -1,121 +1,25 @@
 spring:
-  profiles: dev
+    profiles: docker
+    jpa:
+        database: MYSQL
 
+    datasource:
+        url: jdbc:mysql://localhost:3306/library
+        username: root
+        password: toor
 server:
   port: 0
-  
-eureka:
-  client:
-    registerWithEureka: true
-    fetchRegistry: true
-    initialInstanceInfoReplicationIntervalSeconds: 5
-    serviceUrl:
-      defaultZone: http://192.168.99.100:8761/eureka/
-  instance:
-    instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
-    leaseRenewalIntervalInSeconds: 30
-    leaseExpirationDurationInSeconds: 90
-    preferIpAddress: true
 
-    
-logging:
-  level:
-    ROOT: INFO
-    org.springframework.web: DEBUG
-    org.springframework.web.cors: DEBUG
-  file: D:/Ness/FullStack/POC/Logs/${spring.application.name}.log
+flyway:
+    baselineOnMigrate: true
 
-mongo:
-  db:
-    user: test
-    password: test
-    host: 172.26.115.75
-    port: 27017
-    database: test 
----
-  
-spring:
-  profiles: t9dssa01
-
-server:
-  port: 0  
-  
-
-eureka:
-  client:
-    registerWithEureka: true
-    fetchRegistry: true
-    initialInstanceInfoReplicationIntervalSeconds: 5
-    serviceUrl:
-      defaultZone: http://t9dssa01:8761/eureka/, http://t9dssa02:8761/eureka/
-  instance:
-    hostname: t9dssa01
-    instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
-    leaseRenewalIntervalInSeconds: 30
-    leaseExpirationDurationInSeconds: 90
-
-logging:
-  level:
-    ROOT: INFO
-    org.springframework.web: DEBUG
-
-dashcontroller:
-  keystorePath: /apps/dss/keys/pan.jks
-  keystorePassword: devpan
-  panalias: devpan
-
----
-  
-spring:
-  profiles: t9dssa02
-
-server:
-  port: 0  
-   
-
-eureka:
-  client:
-    registerWithEureka: true
-    fetchRegistry: true
-    initialInstanceInfoReplicationIntervalSeconds: 5
-    serviceUrl:
-      defaultZone: http://t9dssa02:8761/eureka/, http://t9dssa01:8761/eureka/
-  instance:
-    hostname: t9dssa02
-    instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
-    leaseRenewalIntervalInSeconds: 30
-    leaseExpirationDurationInSeconds: 90
-
-logging:
-  level:
-    ROOT: INFO
-    org.springframework.web: DEBUG
-
-dashcontroller:
-  keystorePath: /apps/dss/keys/pan.jks
-  keystorePassword: devpan
-  panalias: devpan
-
----
-spring:
-  profiles: docker
- 
-server:
-  port: 0
- 
 eureka:
   instance:
     preferIpAddress: true
   client:
     serviceUrl:
-      defaultZone: http://192.168.99.100:8761/eureka/ 
-mongo:
-  db:
-    user: test
-    password: test
-    host: 192.168.99.100
-    port: 27017
-    database: test 
+      defaultZone: http://localhost:8761/eureka/
+
 
 ---
 
@@ -125,9 +29,10 @@ spring:
         database: MYSQL
 
     datasource:
-        url: jdbc:mysql://localhost:3306/library
-        username: root
-        password: toor
+        url: jdbc:mysql://172.26.116.75:3306/library
+        username: fsegroup
+        password: fsegroup
+        driver: com.mysql.jdbc.Driver
 server:
   port: 0
 
