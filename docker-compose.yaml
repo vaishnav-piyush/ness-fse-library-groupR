@@ -1,6 +1,9 @@
 version: '2'
 services:
-  library-service:
+  user-service:
+    image: user-1.0
+    depends_on:
+     - discovery-service
     image: library-1.0
     depends_on:
      - discovery-service

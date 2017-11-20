@@ -89,6 +89,7 @@ B) START MONGO CONTAINER
 ****************************************************************************************	
 	* start registry on 8765
 	* start library on random port
+	* start user on random port
 	* start gateway on 8761
 	* start the UI
 A) Build Images : 
@@ -99,12 +100,15 @@ A) Build Images :
 	docker build --tag=gateway-1.0 .
 	cd /e/Naveen_Home/FSE_HOME/Docker/FSE_FINAL_CODE/library
 	docker build --tag=library-1.0 .
+	cd /e/Naveen_Home/FSE_HOME/Docker/FSE_FINAL_CODE/user
+	docker build --tag=user-1.0 .
 	docker images
 
 B) Run Images :
 	docker run -d --name registry --network=spring_demo_net -p 8761:8761  registry-1.0
 	docker run -d --name gateway --network=spring_demo_net --add-host="localhost:192.168.99.100" -p 8765:8765  gateway-1.0 .
 	docker run -d --name library --network=spring_demo_net library-1.0 .  
+	docker run -d --name user --network=spring_demo_net user-1.0 .  
 
 C) Build and Run UI Image
 
