@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.ness.services.authserver</groupId>
-	<artifactId>authserver</artifactId>
+	<artifactId>ness-fse-authserver</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>authserver</name>
+	<name>ness-fse-authserver</name>
 	<description>Auth Server for Full Stack Library - Group R</description>
 
 	<parent>
