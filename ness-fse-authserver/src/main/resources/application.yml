@@ -5,4 +5,34 @@ security:
   oauth2: 
     resource:
       id: id
-      
+logging:
+    level:
+    root: DEBUG
+---  
+spring:
+  profiles: local
+  ### Database Settings
+  datasource:
+    url: jdbc:h2:mem:auth-server;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    platform: h2
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        use_sql_comments: true
+        format_sql: true
+        
+### H2 Settings
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        trace: false
+        web-allow-others: false
