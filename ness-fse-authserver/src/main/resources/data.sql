@@ -1,0 +1,2 @@
+INSERT INTO USER VALUES(1, 1,'2017-11-17','Piyush', 'Vaishnav','passwordPiyush',2,'2017-11-17','vaishnav.piyush')
+INSERT INTO USER VALUES(2, 1,'2017-11-17','Swathi', 'Sheshadri','passwordSwathi',1,'2017-11-17','ts.swathi')
