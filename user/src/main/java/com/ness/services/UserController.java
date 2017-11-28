@@ -28,7 +28,7 @@ public class UserController
     
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    UserDTO createUser(@RequestBody @Valid UserDTO userDto) {
+    UserDTO createUser(@RequestBody UserDTO userDto) {
         LOGGER.info("Creating a new user entry with information: {}", userDto);
         UserDTO created = service.create(userDto);
         LOGGER.info("Created a new user entry with information: {}", created);

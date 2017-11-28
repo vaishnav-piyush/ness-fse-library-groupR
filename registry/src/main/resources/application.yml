@@ -15,67 +15,6 @@ logging:
   file: D:/Ness/FullStack/POC/Logs/${spring.application.name}.log
 
 ---
-
-spring:
-  profiles: t9dssa01
-
-server:
-  port: 8761
-
-eureka:
-  client:
-    registerWithEureka: true
-    fetchRegistry: true
-    initialInstanceInfoReplicationIntervalSeconds: 5
-    serviceUrl:
-      defaultZone: http://t9dssa02:8761/eureka/
-  instance:
-    hostname: t9dssa01
-    registryFetchIntervalSeconds: 1
-    leaseRenewalIntervalInSeconds: 2
-    leaseExpirationDurationInSeconds: 5
-
-  server:
-    enable-self-preservation: false
-    waitTimeInMsWhenSyncEmpty: 0
-
-logging:
-  level:
-    com.netflix.discovery.DiscoveryClient: TRACE
-
-
-
-
----
-
-spring:
-  profiles: t9dssa02
-
-server:
-  port: 8761
-
-eureka:
-  client:
-    registerWithEureka: true
-    fetchRegistry: true
-    initialInstanceInfoReplicationIntervalSeconds: 5
-    serviceUrl:
-      defaultZone: http://t9dssa01:8761/eureka/
-  instance:
-    hostname: t9dssa02
-    registryFetchIntervalSeconds: 1
-    leaseRenewalIntervalInSeconds: 2
-    leaseExpirationDurationInSeconds: 5
-
-  server:
-    enable-self-preservation: false
-    waitTimeInMsWhenSyncEmpty: 0
-
-logging:
-  level:
-    com.netflix.discovery.DiscoveryClient: TRACE
-
----
 spring:
   profiles: docker
  
@@ -109,3 +48,8 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
        #defaultZone: http://user:${eureka.password}@discovery2:8762/eureka/
+logging:
+  level:
+    com.netflix.discovery.DiscoveryClient: TRACE
+  file: ./Logs/${spring.application.name}.log
+       

@@ -61,7 +61,8 @@ public class UserServiceImpl implements UserService {
         user.setLastName(userDTO.getLastName());
         user.setRoleId(userDTO.getAdmin() ? 1 : 2);
         user.setUserName(userDTO.getUserName());
-        user.setPassword(PasswordManager.encrypt(userDTO.getPassword()));
+//        user.setPassword(PasswordManager.encrypt(userDTO.getPassword()));
+        user.setPassword(userDTO.getPassword());
         user.setCreatedDate(new Date(Calendar.getInstance().getTime().getTime()));
         user.setUpdatedDate(new Date(Calendar.getInstance().getTime().getTime()));
         return user;
