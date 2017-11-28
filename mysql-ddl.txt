@@ -1,0 +1,36 @@
+Create Table role(
+   ROLEID INT NOT NULL AUTO_INCREMENT,
+   ROLENAME VARCHAR(15) NOT NULL,
+   ACTIVE CHAR(1) DEFAULT 'Y', 
+   CREATE_DATE DATE,
+   UPDATE_DATE DATE,
+   PRIMARY KEY ( ROLEID )
+);
+
+
+Create Table user(
+   USER_ID INT NOT NULL AUTO_INCREMENT,
+   FIRST_NAME VARCHAR(15) NOT NULL,
+   LAST_NAME VARCHAR(15) NOT NULL,
+   LOGIN_NAME VARCHAR(30) NOT NULL,
+   PASSWORD VARCHAR(30) NOT NULL,
+   ACTIVE CHAR(1) DEFAULT 'Y', 
+   ROLEID INT NOT NULL,
+   CREATE_DATE DATE,
+   UPDATE_DATE DATE,
+   PRIMARY KEY ( USER_ID )
+);
+
+Create Table audit(
+   ID INT NOT NULL AUTO_INCREMENT,
+   EVENT_NAME VARCHAR(30) NOT NULL,                             -- API invoked e.g. Document_Added, Document_Reserved etc.
+   EVENT_ID VARCHAR(30) NOT NULL,                                     -- Primary Key that would be used for Audit Trail Search. E.g. Document ID in our case
+   LOGIN_NAME VARCHAR(30) NOT NULL,                             -- as in USER.LOGIN_NAME. This is the logged in User who is performing the operation i.e. Could be Admin OR Basic User
+   UPDATE_DATE DATE,
+   NOTES VARCHAR(50),                                                                 -- Optional field. Additional Data e.g. Document Reserved For User.LOGIN_NAME (in case Admin is performing operation on user’s behalf)
+   PRIMARY KEY ( ID )
+);
+
+
+CREATE USER 'fsegroup'@'%' IDENTIFIED BY 'fsegroup';
+GRANT ALL PRIVILEGES ON library.* TO 'fsegroup'@'%' WITH GRANT OPTION; 
