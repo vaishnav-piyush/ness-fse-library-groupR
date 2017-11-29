@@ -12,6 +12,8 @@ import { FormsModule } from "@angular/forms";
 import { NewBookComponent } from "./books/new-book.component";
 import {RegisterUserComponent} from "./user/register-user.component";
 import {UserService} from "./user/user.service";
+import {AuditComponent} from "./audit/audit-search.component";
+import {AuditService} from "./audit/audit.service";
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +21,8 @@ import {UserService} from "./user/user.service";
     IssuedBooksComponent,
     UserFormComponent,
     NewBookComponent,
-    RegisterUserComponent
+    RegisterUserComponent,
+    AuditComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,8 @@ import {UserService} from "./user/user.service";
   ],
   providers: [
     BookService,
-    UserService
+    UserService,
+    AuditService
   ],
   bootstrap: [AppComponent]
 })
