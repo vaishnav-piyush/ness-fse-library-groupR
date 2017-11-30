@@ -1,0 +1,41 @@
+<div>
+  <h3>{{ pageTitle }}</h3>
+  <div class="alert alert-info" id="successAlert" [hidden]="!successMessage">
+      <a  class="close" (click)="toggleSuccessAlert()">&times;</a>
+      <strong>{{successMessage}}</strong>
+  </div>
+  <div class="alert alert-warning" [hidden]="!errorMessage" id="errorAlert">
+    <a  class="close" (click)="toggleErrorAlert()">&times;</a>
+    <strong>{{errorMessage}}</strong>
+  </div>
+  <div class="well">
+    <div class="form-group form-group-sm">
+      <input [(ngModel)]='eventId' class="form-control" placeholder="BookId">
+      <button (click)='getAudit()' class="btn btn-default btn-sm">Submit</button>
+    </div>
+  </div>
+  
+  <table class="table table-striped" style="background: #f3f3f3;">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Event name</th>
+        <th>Login name</th>
+        <th>Updated date</th>
+        <th>Notes</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let audit of auditList'>
+        <td>{{audit.id}}</td>        
+        <td>{{audit.event_name}}</td>
+        <td>{{audit.login_name}}</td>
+        <td>{{audit.updatedDate}}</td>
+        <td>{{audit.notes}}</td>
+      </tr>
+    </tbody>
+  </table>
+  
+
+</div>

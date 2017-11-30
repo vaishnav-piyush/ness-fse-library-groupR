@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: auditservice
+  cloud:
+    config:
+      enabled: false
+  profiles:
+    active: dev

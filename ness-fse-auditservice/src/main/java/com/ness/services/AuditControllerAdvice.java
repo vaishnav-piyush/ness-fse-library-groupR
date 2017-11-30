@@ -1,0 +1,50 @@
+package com.ness.services;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+import com.ness.services.error.BookNotFoundException;
+import com.ness.services.error.ErrorOutput;
+import com.ness.services.error.GenericExceptionCodeForInvalidAttributes;
+import com.ness.services.error.LibraryServiceException;
+
+@ControllerAdvice(assignableTypes=AuditController.class)
+public class AuditControllerAdvice implements GenericExceptionCodeForInvalidAttributes
+{
+
+	@ExceptionHandler
+    @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
+    @ResponseBody
+    ErrorOutput handleException(Exception nve){
+		nve.printStackTrace();
+		ErrorOutput output = new ErrorOutput();
+		output.setStatusCode("50100");
+		output.setDescription("Library Service General Failure");
+		return output;
+    }    
+    
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
+    @ResponseBody
+    ErrorOutput handleException(LibraryServiceException nve){
+		nve.printStackTrace();
+		ErrorOutput output = new ErrorOutput();
+		output.setStatusCode("50200");
+		output.setDescription("Library Service Exception");
+		return output;
+    }
+    
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    ErrorOutput handleException(BookNotFoundException nve){
+		nve.printStackTrace();
+		ErrorOutput output = new ErrorOutput();
+		output.setStatusCode(nve.getStatusCode());
+		output.setDescription(nve.getDescription());
+		return output;
+    }
+}
