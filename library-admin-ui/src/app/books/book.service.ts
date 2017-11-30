@@ -10,11 +10,11 @@ import 'rxjs/add/operator/retry';
 @Injectable()
 export class BookService {
   // private _urlGetAllBooks = '../testdata/all-books.json';
-  private _urlGetAllBooks = 'http://localhost:8765/fse/book';
+  private _urlGetAllBooks = 'http://localhost:8765/fse/lib/book';
   private _urlGetBookById = "../testdata/single-book.json";
-  private _urlUpdateBook = "http://localhost:8765/fse/book"
-  private _urlCreateBook = "http://localhost:8765/fse/book";
-  private _urlDeleteBook = "http://localhost:8765/fse/book";
+  private _urlUpdateBook = "http://localhost:8765/fse/lib/book"
+  private _urlCreateBook = "http://localhost:8765/fse/lib/book";
+  private _urlDeleteBook = "http://localhost:8765/fse/lib/book";
 
   constructor(private _http : HttpClient) {
 

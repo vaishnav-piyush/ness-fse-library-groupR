@@ -10,8 +10,8 @@ import {User} from './user.model';
 
 @Injectable()
 export class UserService {
-  private _urlGetAllUsers = 'http://localhost:8765/fse/user';
-  private _urlcreateUser = 'http://localhost:8765/fse/user';
+  private _urlGetAllUsers = 'http://localhost:8765/fse/usr/user';
+  private _urlcreateUser = 'http://localhost:8765/fse/usr/user';
 
   constructor(private _http : HttpClient) {
 

@@ -9,7 +9,7 @@ import 'rxjs/add/operator/retry';
 
 @Injectable()
 export class AuditService {
-   private _urlGetAllAudits = 'http://localhost:8765/fse/audit/audit';
+   private _urlGetAllAudits = 'http://localhost:8765/fse/aud/audit';
 
   constructor(private _http : HttpClient) { 
 
