@@ -5,13 +5,29 @@ security:
   oauth2: 
     resource:
       id: id
+      
 logging:
-    level:
-    root: DEBUG
+  level:
+    ROOT: INFO
+    org.springframework.web: INFO
+    com.ctc.ctfs.dss.gatewayservice.filters: DEBUG
+  file: ./logs/${spring.application.name}.log
+  
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    initialInstanceInfoReplicationIntervalSeconds: 5    
+  instance:
+    instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    leaseRenewalIntervalInSeconds: 30
+    leaseExpirationDurationInSeconds: 90
+    preferIpAddress: true  
+        
 ---  
 spring:
   profiles: local
-  ### Database Settings
+  ### H2 Database Settings
   datasource:
     url: jdbc:h2:mem:auth-server;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
     platform: h2
@@ -36,3 +52,49 @@ spring:
       settings:
         trace: false
         web-allow-others: false
+        
+---  
+spring:
+  profiles: dev
+  jpa:
+    database: MYSQL
+    show-sql: true
+    hibernate:
+      #ddl-auto: update      
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties: 
+      hibernate: 
+        show-sql: true
+        use_sql_comments: true
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL5Dialect
+  datasource:
+      driver: com.mysql.jdbc.Driver
+      url: jdbc:mysql://172.26.116.75:3306/library
+      username: fsegroup
+      password: fsegroup
+      testWhileIdle: true
+      validationQuery: SELECT 1
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/   
+      
+---  
+spring:
+  profiles: docker
+  jpa:
+      database: MYSQL
+  datasource:
+      driver: com.mysql.jdbc.Driver
+      url: jdbc:mysql://192.168.99.100:3306/library
+      username: fsegroup
+      password: fsegroup
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.99.100:8761/eureka/          

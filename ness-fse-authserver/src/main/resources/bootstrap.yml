@@ -1,5 +1,8 @@
 spring:
   application:
-    name: ness-fse-authserver
+    name: authservice
+  cloud:
+    config:
+      enabled: false
   profiles:
-    active: local
+    active: dev

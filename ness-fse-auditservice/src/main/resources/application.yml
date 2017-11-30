@@ -1,24 +1,15 @@
-spring:
-  profiles: dev
-  jpa:
-        database: MYSQL
-
-datasource:
-        driver: com.mysql.jdbc.Driver
-        url: jdbc:mysql://172.26.116.75:3306/library
-        username: fsegroup
-        password: fsegroup
-
 server:
   port: 0
-  
+
+spring:
+  jpa:
+     database: MYSQL
+
 eureka:
   client:
     registerWithEureka: true
     fetchRegistry: true
-    initialInstanceInfoReplicationIntervalSeconds: 5
-    serviceUrl:
-      defaultZone: http://127.0.0.1:8761/eureka/
+    initialInstanceInfoReplicationIntervalSeconds: 5    
   instance:
     instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
     leaseRenewalIntervalInSeconds: 30
@@ -31,37 +22,49 @@ logging:
     ROOT: INFO
     org.springframework.web: DEBUG
     org.springframework.web.cors: DEBUG
-  file: D:/Ness/FullStack/POC/Logs/${spring.application.name}.log
+  file: ./logs/${spring.application.name}.log
 
-mongo:
-  db:
-    user: test
-    password: test
-    host: 172.26.116.75
-    port: 27017
-    database: test 
- 
+---
+spring:
+  profiles: local
 
+datasource:
+        driver: com.mysql.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/library
+        username: fsegroup
+        password: fsegroup
 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
+
+---
+spring:
+  profiles: dev
+
+datasource:
+        driver: com.mysql.jdbc.Driver
+        url: jdbc:mysql://172.26.116.75:3306/library
+        username: fsegroup
+        password: fsegroup
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
 
 ---
 spring:
   profiles: docker
  
-server:
-  port: 0
- 
 eureka:
-  instance:
-    preferIpAddress: true
   client:
     serviceUrl:
       defaultZone: http://192.168.99.100:8761/eureka/ 
-mongo:
-  db:
-    user: test
-    password: test
-    host: 172.26.116.75
-    port: 27017
-    database: test 
 
+datasource:
+        driver: com.mysql.jdbc.Driver
+        url: jdbc:mysql://192.168.99.100:3306/library
+        username: fsegroup
+        password: fsegroup

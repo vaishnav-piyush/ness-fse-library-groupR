@@ -9,11 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.Data;
-
 @Entity
-@Table(name="USER")
-@Data
+@Table(name="user")
+/*@Data*/
 public class User {
 
     @Id
@@ -27,7 +25,7 @@ public class User {
     @Column(name = "LAST_NAME")
     private String lastName;
 
-    @Column(name = "ROLEID")
+    @Column(name = "ROLE_ID")
     private Integer roleId;
 
     @Column(name = "ACTIVE")
@@ -44,5 +42,86 @@ public class User {
 
     @Column(name = "UPDATE_DATE")
     private Date updatedDate;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public Integer getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Date getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public Date getUpdatedDate() {
+		return updatedDate;
+	}
+
+	public void setUpdatedDate(Date updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName="
+				+ lastName + ", roleId=" + roleId + ", active=" + active
+				+ ", userName=" + userName + ", password=" + password
+				+ ", createdDate=" + createdDate + ", updatedDate="
+				+ updatedDate + "]";
+	}
 
 }

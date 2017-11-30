@@ -5,41 +5,5 @@ spring:
     config:
       enabled: false
   profiles:
-    active: docker
+    active: dev
 
----
-
-spring:
-  profiles: t9dssa01
-  application:
-    name: gatewayservice
-  cloud:
-    config:
-     enabled: true
-     fail-fast: true
-     uri: http://t9dssa01:8888
-     username: dssdev
-     #password: '{cipher}919fdc4ee44add3cefca917a67d4bcc3a33b7a88d7f2b0f8dc94e23e7ad25ffe'
-     password: dssdev
-logging:
-  file: /apps/dss/logs/${spring.application.name}/${spring.application.name}.log
-  
-
----
-
-spring:
-  profiles: t9dssa02        
-  application:
-    name: gatewayservice
-  cloud:
-    config:
-     enabled: true
-     fail-fast: true
-     uri: http://t9dssa02:8888
-     username: dssdev
-     #password: '{cipher}919fdc4ee44add3cefca917a67d4bcc3a33b7a88d7f2b0f8dc94e23e7ad25ffe'
-     password: dssdev
-logging:
-  file: /apps/dss/logs/${spring.application.name}/${spring.application.name}.log
-
-      

@@ -10,7 +10,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name = "user_id")
+    @Column(name = "USER_ID")
     private Integer id;
 
     @Column(name = "FIRST_NAME")
@@ -19,7 +19,7 @@ public class User {
     @Column(name = "LAST_NAME")
     private String lastName;
 
-    @Column(name = "ROLEID")
+    @Column(name = "ROLE_ID")
     private Integer roleId;
 
     @Column(name = "ACTIVE")
