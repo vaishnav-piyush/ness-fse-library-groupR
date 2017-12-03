@@ -7,6 +7,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 import 'rxjs/add/operator/retry';
 import 'rxjs/add/observable/throw';
 import {User} from './user.model';
+import { HttpHeaders } from "@angular/common/http";
 
 @Injectable()
 export class UserService {
@@ -18,14 +19,26 @@ export class UserService {
   }
 
   getAllUsers() : Observable<User[]> {
-    return this._http.get<User[]>(this._urlGetAllUsers).retry(3)
+    let currentUser : any = localStorage.getItem('currentUser');
+    let access_token : string =  JSON.parse(currentUser).access_token; 
+    console.log(JSON.stringify(currentUser));
+    console.log("Bearer " + JSON.parse(currentUser).access_token);
+    return this._http.get<User[]>(this._urlGetAllUsers, {
+      headers: new HttpHeaders().set("Authorization", `Bearer ${access_token}`)
+    }).retry(3)
     .do((data:User[]) => console.log('Number of users fetched: ' + data.length))
     .catch(this.ErrorHandler);
   }
 
   createUser(user : User) : Observable<User> {
+    let currentUser : any = localStorage.getItem('currentUser');
+    let access_token : string =  JSON.parse(currentUser).access_token; 
+    console.log(JSON.stringify(currentUser));
+    console.log("Bearer " + JSON.parse(currentUser).access_token);
     console.log('Creating new user: ' + JSON.stringify(user));
-    return this._http.post(this._urlcreateUser, user).retry(3)
+    return this._http.post(this._urlcreateUser, user, {
+      headers: new HttpHeaders().set("Authorization", `Bearer ${access_token}`)
+    }).retry(3)
       .do(data => console.log('Created New User: ' + JSON.stringify(data)))
       .catch(this.ErrorHandler);
   }

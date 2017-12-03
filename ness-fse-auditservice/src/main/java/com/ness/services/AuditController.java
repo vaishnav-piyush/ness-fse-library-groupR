@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,7 @@ public class AuditController
     @Autowired
     private AuditService service;
     
+    @PreAuthorize("hasRole('book_write')")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     List<AuditBO> findById(@PathVariable("id") String id) throws Exception {
         LOGGER.info("Finding audit entry with book id: {}", id);
@@ -35,6 +37,7 @@ public class AuditController
         return auditBOlist;
     }
     
+    @PreAuthorize("hasRole('book_write')")
     @RequestMapping(method = RequestMethod.GET)
     List<AuditBO> findAll() throws Exception {
         List<AuditBO> auditBOlist = service.findAll();

@@ -46,7 +46,23 @@ export class IssuedBooksComponent implements OnInit {
   ngOnInit() {
     this._bookService.getAllBooks().subscribe(
       books => {this.issuedBooks = books.filter(book => book.issueStatus == "ISSUED")},
-      err => this.errorMessage = <any>err
+      (err: HttpErrorResponse) => {
+        if (err.error instanceof Error) {
+          // A client-side or network error occurred. Handle it accordingly.
+          this.successMessage = "";
+          this.errorMessage = "Something went wrong, unable to complete operation.";
+          console.log(`Error: Http Status Code ${err.status}, Error Description: ` + JSON.stringify(err.error));
+        } else {
+          this.successMessage = "";
+          if(err.status == 401) {
+            console.log(`Error: Http Status Code ${err.status}, Error Description: ${err.error.error_description}, Response Body: ` + JSON.stringify(err.error));
+            this.errorMessage = "You are not authorized to do this operation."
+          } else {
+            console.log(`Error: Http Status Code ${err.status}, Response Body: ` + JSON.stringify(err.error));
+            this.errorMessage = "Coudn't publish update to the server. Please try again later.";
+          }         
+        }
+      }
     );
   }
 
@@ -60,15 +76,21 @@ export class IssuedBooksComponent implements OnInit {
         this.errorMessage = "";
         this.successMessage = "'" + releasedBook.title + "' is released";
       }, 
-      (err : HttpErrorResponse) => {
+      (err: HttpErrorResponse) => {
         if (err.error instanceof Error) {
           // A client-side or network error occurred. Handle it accordingly.
           this.successMessage = "";
           this.errorMessage = "Something went wrong, unable to complete operation.";
+          console.log(`Error: Http Status Code ${err.status}, Error Description: ` + JSON.stringify(err.error));
         } else {
-          console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
           this.successMessage = "";
-          this.errorMessage = "Coudn't publish update to the server. Please try again later.";
+          if(err.status == 401) {
+            console.log(`Error: Http Status Code ${err.status}, Error Description: ${err.error.error_description}, Response Body: ` + JSON.stringify(err.error));
+            this.errorMessage = "You are not authorized to do this operation."
+          } else {
+            console.log(`Error: Http Status Code ${err.status}, Response Body: ` + JSON.stringify(err.error));
+            this.errorMessage = "Coudn't publish update to the server. Please try again later.";
+          }         
         }
       }
     );

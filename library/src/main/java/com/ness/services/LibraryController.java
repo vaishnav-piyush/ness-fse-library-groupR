@@ -8,6 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,7 @@ import com.ness.services.service.LibraryService;
 
 @RestController
 @RequestMapping("/book")
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class LibraryController
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(LibraryController.class);
@@ -30,6 +33,7 @@ public class LibraryController
     /*@RequestMapping(value = "/issue",method = RequestMethod.POST)*/
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasRole('book_write')")
     BookBO create(@RequestBody @Valid BookBO bookBO) {
         LOGGER.info("Creating a new Book entry with information: {}", bookBO);
         BookBO created = service.create(bookBO);
@@ -37,6 +41,7 @@ public class LibraryController
         return created;
     }
 
+    @PreAuthorize("hasRole('book_write')")
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     BookBO delete(@PathVariable("id") String id) throws Exception {
         LOGGER.info("Deleting Book entry with id: {}", id);
@@ -45,6 +50,7 @@ public class LibraryController
         return deleted;
     }
 
+    @PreAuthorize("hasRole('book_read')")
     @RequestMapping(method = RequestMethod.GET)
     List<BookBO> findAll() {
         LOGGER.info("Finding all Book entries");
@@ -53,6 +59,7 @@ public class LibraryController
         return bookBOs;
     }
 
+    @PreAuthorize("hasRole('book_read')")
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
     BookBO findById(@PathVariable("id") String id) throws Exception {
         LOGGER.info("Finding Book entry with id: {}", id);
@@ -61,6 +68,7 @@ public class LibraryController
         return bookBO;
     }
 
+    @PreAuthorize("hasRole('book_reserve')")
     @RequestMapping(value = "{id}", method = RequestMethod.PUT)
     BookBO update(@RequestBody @Valid BookBO bookBO) throws Exception {
         LOGGER.info("Updating todo entry with information: {}", bookBO);
