@@ -1,6 +1,7 @@
 package com.ness.services;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -45,6 +46,17 @@ public class LibraryControllerAdvice implements GenericExceptionCodeForInvalidAt
 		ErrorOutput output = new ErrorOutput();
 		output.setStatusCode(nve.getStatusCode());
 		output.setDescription(nve.getDescription());
+		return output;
+    }
+    
+    @ExceptionHandler(AccessDeniedException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ResponseBody
+    ErrorOutput handleException(AccessDeniedException e){
+		e.printStackTrace();
+		ErrorOutput output = new ErrorOutput();
+		output.setStatusCode("401");
+		output.setDescription(e.getLocalizedMessage());
 		return output;
     }
 }

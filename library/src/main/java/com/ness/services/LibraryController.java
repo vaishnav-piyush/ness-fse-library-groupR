@@ -22,7 +22,6 @@ import com.ness.services.service.LibraryService;
 
 @RestController
 @RequestMapping("/book")
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class LibraryController
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(LibraryController.class);
@@ -34,7 +33,7 @@ public class LibraryController
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasRole('book_write')")
-    BookBO create(@RequestBody @Valid BookBO bookBO) {
+    public BookBO create(@RequestBody @Valid BookBO bookBO) {
         LOGGER.info("Creating a new Book entry with information: {}", bookBO);
         BookBO created = service.create(bookBO);
         LOGGER.info("Created a new Book entry with information: {}", created);
@@ -43,7 +42,7 @@ public class LibraryController
 
     @PreAuthorize("hasRole('book_write')")
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
-    BookBO delete(@PathVariable("id") String id) throws Exception {
+    public BookBO delete(@PathVariable("id") String id) throws Exception {
         LOGGER.info("Deleting Book entry with id: {}", id);
         BookBO deleted = service.delete(id);
         LOGGER.info("Deleted Book entry with information: {}", deleted);
@@ -52,7 +51,7 @@ public class LibraryController
 
     @PreAuthorize("hasRole('book_read')")
     @RequestMapping(method = RequestMethod.GET)
-    List<BookBO> findAll() {
+    public List<BookBO> findAll() {
         LOGGER.info("Finding all Book entries");
         List<BookBO> bookBOs = service.findAll();
         LOGGER.info("Found {} Book entries", bookBOs.size());
@@ -61,7 +60,7 @@ public class LibraryController
 
     @PreAuthorize("hasRole('book_read')")
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
-    BookBO findById(@PathVariable("id") String id) throws Exception {
+    public BookBO findById(@PathVariable("id") String id) throws Exception {
         LOGGER.info("Finding Book entry with id: {}", id);
         BookBO bookBO = service.findById(id);
         LOGGER.info("Found Book entry with information: {}", bookBO);
@@ -70,7 +69,7 @@ public class LibraryController
 
     @PreAuthorize("hasRole('book_reserve')")
     @RequestMapping(value = "{id}", method = RequestMethod.PUT)
-    BookBO update(@RequestBody @Valid BookBO bookBO) throws Exception {
+    public BookBO update(@RequestBody @Valid BookBO bookBO) throws Exception {
         LOGGER.info("Updating todo entry with information: {}", bookBO);
         BookBO updated = service.update(bookBO);
         LOGGER.info("Updated todo entry with information: {}", updated);

@@ -28,18 +28,18 @@ public class AuditController
     @Autowired
     private AuditService service;
     
-    @PreAuthorize("hasRole('book_write')")
+    @PreAuthorize("hasRole('audit_trail')")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    List<AuditBO> findById(@PathVariable("id") String id) throws Exception {
+    public List<AuditBO> findById(@PathVariable("id") String id) throws Exception {
         LOGGER.info("Finding audit entry with book id: {}", id);
         List<AuditBO> auditBOlist = service.findById(id);
         LOGGER.info("Found audit entry with information: {}", auditBOlist);
         return auditBOlist;
     }
     
-    @PreAuthorize("hasRole('book_write')")
+    @PreAuthorize("hasRole('audit_trail')")
     @RequestMapping(method = RequestMethod.GET)
-    List<AuditBO> findAll() throws Exception {
+    public List<AuditBO> findAll() throws Exception {
         List<AuditBO> auditBOlist = service.findAll();
         LOGGER.info("Found audit entry with information: {}", auditBOlist);
         return auditBOlist;
