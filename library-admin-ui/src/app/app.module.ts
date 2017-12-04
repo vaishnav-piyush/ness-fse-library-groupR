@@ -14,6 +14,10 @@ import {RegisterUserComponent} from "./user/register-user.component";
 import {UserService} from "./user/user.service";
 import {AuditComponent} from "./audit/audit-search.component";
 import {AuditService} from "./audit/audit.service";
+import { AuthGuard } from "./guards/auth.guard";
+import { LoginComponent } from './login/login.component';
+import { AuthenticationService } from './login/authentication.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +26,8 @@ import {AuditService} from "./audit/audit.service";
     UserFormComponent,
     NewBookComponent,
     RegisterUserComponent,
-    AuditComponent
+    AuditComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +38,9 @@ import {AuditService} from "./audit/audit.service";
   providers: [
     BookService,
     UserService,
-    AuditService
+    AuditService,
+    AuthGuard,
+    AuthenticationService
   ],
   bootstrap: [AppComponent]
 })

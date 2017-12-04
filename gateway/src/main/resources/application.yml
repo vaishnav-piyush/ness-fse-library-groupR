@@ -33,6 +33,8 @@ zuul:
       path: /fse/usr/**
     auditservice:
       path: /fse/aud/**
+    authservice: 
+      path: /fse/auth/**
     
 hystrix:
   command:

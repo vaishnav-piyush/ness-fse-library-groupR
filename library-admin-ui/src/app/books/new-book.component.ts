@@ -39,17 +39,21 @@ export class NewBookComponent implements OnInit {
         this.submitted = true;
         this.successAlert.nativeElement.style.display='block';
       },
-      (err : HttpErrorResponse) => {
+      (err: HttpErrorResponse) => {
         if (err.error instanceof Error) {
           // A client-side or network error occurred. Handle it accordingly.
           this.successMessage = "";
           this.errorMessage = "Something went wrong, unable to complete operation.";
-          this.submitted = true;
+          console.log(`Error: Http Status Code ${err.status}, Error Description: ` + JSON.stringify(err.error));
         } else {
-          console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
           this.successMessage = "";
-          this.errorMessage = "Coudn't publish update to the server. Please try again later.";
-          this.submitted = true;
+          if(err.status == 401) {
+            console.log(`Error: Http Status Code ${err.status}, Error Description: ${err.error.error_description}, Response Body: ` + JSON.stringify(err.error));
+            this.errorMessage = "You are not authorized to do this operation.";
+          } else {
+            console.log(`Error: Http Status Code ${err.status}, Response Body: ` + JSON.stringify(err.error));
+            this.errorMessage = "Coudn't publish update to the server. Please try again later.";
+          }         
         }
       }
     );

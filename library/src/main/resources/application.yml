@@ -20,6 +20,11 @@ logging:
     org.springframework.web.cors: DEBUG
   file: ./logs/${spring.application.name}.log
 
+security:
+  oauth2:
+    resource:
+      id: id
+
 ---
 spring:
   profiles: local
@@ -36,6 +41,11 @@ mongo:
     host: 127.0.0.1
     port: 27017
     database: test
+
+security:
+  oauth2:
+    resource:
+      userInfoUri: http://localhost:9090/services/user
 
 ---
 spring:
@@ -54,6 +64,11 @@ mongo:
     port: 27017
     database: test
 
+security:
+  oauth2:
+    resource:
+      userInfoUri: http://localhost:9090/services/user
+
 ---
 spring:
   profiles: docker
@@ -70,3 +85,8 @@ mongo:
     host: 192.168.99.100
     port: 27017
     database: test     
+    
+security:
+  oauth2:
+    resource:
+      userInfoUri: http://192.168.99.100:9090/services/user

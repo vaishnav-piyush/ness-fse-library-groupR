@@ -1,2 +1,2 @@
-INSERT INTO USER VALUES(1, 1,'2017-11-17','Piyush', 'Vaishnav','passwordPiyush',2,'2017-11-17','vaishnav.piyush')
-INSERT INTO USER VALUES(2, 1,'2017-11-17','Swathi', 'Sheshadri','passwordSwathi',1,'2017-11-17','ts.swathi')
+INSERT INTO user(FIRST_NAME,LAST_NAME,LOGIN_NAME,PASSWORD,ROLE_ID,CREATE_DATE,UPDATE_DATE) VALUES ('Swathi','Sheshadri','ts.swathi','abc',1,'2017-11-17','2017-11-17');
+INSERT INTO user(FIRST_NAME,LAST_NAME,LOGIN_NAME,PASSWORD,ROLE_ID,CREATE_DATE,UPDATE_DATE) VALUES ('Piyush','Vaishnav','ts.piyush','abc',2,'2017-10-17','2017-10-17');

@@ -1,6 +1,4 @@
-spring:
-  profiles: dev
-
+---
 server:
   port: 0
   
@@ -26,6 +24,10 @@ logging:
 flyway:
     baselineOnMigrate: true
 
+security:
+  oauth2:
+    resource:
+      id: id
 ---
 spring:
     profiles: local
@@ -33,15 +35,19 @@ spring:
         database: MYSQL
 
     datasource:
-        url: jdbc:mysql://127.0.0.1:3306/library
-        username: root
-        password: toor
+        url: jdbc:mysql://localhost:3306/library
+        username: fsegroup
+        password: fsegroup
 
 eureka:
   client:
     serviceUrl:
       defaultZone: http://127.0.0.1:8761/eureka/
 
+security:
+  oauth2:
+    resource:
+      userInfoUri: http://localhost:9090/services/user
 
 ---
 spring:
@@ -59,4 +65,8 @@ eureka:
     serviceUrl:
       defaultZone: http://127.0.0.1:8761/eureka/
 
+security:
+  oauth2:
+    resource:
+      userInfoUri: http://localhost:9090/services/user
 
