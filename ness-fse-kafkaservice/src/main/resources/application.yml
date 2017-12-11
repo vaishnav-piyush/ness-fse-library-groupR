@@ -1,0 +1,107 @@
+server:
+  port: 0
+  
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    initialInstanceInfoReplicationIntervalSeconds: 5    
+  instance:
+    instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    leaseRenewalIntervalInSeconds: 30
+    leaseExpirationDurationInSeconds: 90
+    preferIpAddress: true
+
+    
+logging:
+  level:
+    ROOT: INFO
+    org.springframework.web: DEBUG
+    org.springframework.web.cors: DEBUG
+  file: ./logs/${spring.application.name}.log
+
+security:
+  oauth2:
+    resource:
+      id: id
+
+---
+spring:
+  profiles: local
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: test-consumer-group
+    template:
+      default-topic: library
+
+datasource:
+        driver: com.mysql.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/library
+        username: fsegroup
+        password: fsegroup
+              
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
+      
+
+security:
+  oauth2:
+    resource:
+      userInfoUri: http://localhost:9090/services/user
+
+---
+spring:
+  profiles: dev
+  kafka:
+    bootstrap-servers:
+      - localhost:9092
+    consumer:
+      group-id: test-consumer-group
+    template:
+      default-topic: library
+
+datasource:
+        driver: com.mysql.jdbc.Driver
+        url: jdbc:mysql://172.26.116.75:3306/library
+        username: fsegroup
+        password: fsegroup
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
+      
+security:
+  oauth2:
+    resource:
+      userInfoUri: http://localhost:9090/services/user
+
+---
+spring:
+  profiles: docker
+  kafka:
+    bootstrap-servers:
+      - localhost:9092
+    consumer:
+      group-id: test-consumer-group
+    template:
+      default-topic: library
+ 
+datasource:
+        driver: com.mysql.jdbc.Driver
+        url: jdbc:mysql://192.168.99.100:3306/library
+        username: fsegroup
+        password: fsegroup 
+ 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.99.100:8761/eureka/ 
+
+security:
+  oauth2:
+    resource:
+      userInfoUri: http://192.168.99.100:9090/services/user

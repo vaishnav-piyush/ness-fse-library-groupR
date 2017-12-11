@@ -35,6 +35,8 @@ zuul:
       path: /fse/aud/**
     authservice: 
       path: /fse/auth/**
+    kafkamessageservice: 
+      path: /fse/kfa/**
     
 hystrix:
   command:

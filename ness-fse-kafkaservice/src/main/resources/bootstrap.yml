@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: kafkamessageservice
+  cloud:
+    config:
+      enabled: false
+  profiles:
+    active: local
+    
