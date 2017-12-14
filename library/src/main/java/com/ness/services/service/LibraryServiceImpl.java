@@ -8,17 +8,19 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.ness.services.error.BookNotFoundException;
 import com.ness.services.model.Book;
 import com.ness.services.model.BookBO;
+import com.ness.services.model.BookEventBO;
 import com.ness.services.repository.BookRepository;
 
 /**
  * This service class saves {@link com.ness.fse.Book.Book} objects
  * to MongoDB database.
- * @author Petri Kainulainen
+ * @author Rohit Saxena
  */
 @Service(value="LibraryService")
 public class LibraryServiceImpl implements LibraryService {
@@ -31,6 +33,9 @@ public class LibraryServiceImpl implements LibraryService {
     LibraryServiceImpl(BookRepository repository) {
         this.repository = repository;
     }
+    
+    @Autowired
+    private EventService eventService;
 
     @Override
     public BookBO create(BookBO bookBO) {
@@ -118,5 +123,13 @@ public class LibraryServiceImpl implements LibraryService {
         book.setTitle(bookBO.getTitle());
         book.setUpdatedDate(new Date());
         return book;
+    }
+    
+    @Async
+    private void raiseEvent(BookBO bookBO, String eventType){
+    	LOGGER.info("LibraryServiceImpl.raiseEvent(): Entry: About To Raise " + eventType + " For bookBO: " + bookBO.toString());
+    	BookEventBO<BookBO> eventBO = new BookEventBO<BookBO>(bookBO);
+    	eventService.raiseEvent(eventBO, eventType);
+    	LOGGER.info("LibraryServiceImpl.raiseEvent(): Exit: Event Raised");
     }
 }

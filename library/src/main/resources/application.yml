@@ -25,6 +25,12 @@ security:
     resource:
       id: id
 
+service:
+    atomic: 
+       kafkaservice:
+          name: kafkamessageservice
+          version: v1
+          versionname: ${service.atomic.kafkaservice.name}_${service.atomic.kafkaservice.version}
 ---
 spring:
   profiles: local

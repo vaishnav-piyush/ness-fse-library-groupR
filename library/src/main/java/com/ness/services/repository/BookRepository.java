@@ -10,7 +10,7 @@ import com.ness.services.model.Book;
 /**
  * This repository provides CRUD operations for {@link com.javaadvent.bootrest.Book.Book}
  * objects.
- * @author Petri Kainulainen
+ * @author Rohit Saxena
  */
 //public interface BookRepository extends Repository<> {
 public interface BookRepository extends MongoRepository<Book, String> {
