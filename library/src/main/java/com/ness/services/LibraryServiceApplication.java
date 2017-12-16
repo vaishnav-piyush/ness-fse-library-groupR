@@ -101,6 +101,7 @@ public class LibraryServiceApplication extends ResourceServerConfigurerAdapter {
 //		.antMatchers("/api/admin").hasRole("book_write")
 		// restricting all access to /api/** to authenticated users
 		.antMatchers("/book/**").authenticated();
+		/*.antMatchers("/book/**").permitAll();*/
 	}
 
 	public static void main(String[] args) {

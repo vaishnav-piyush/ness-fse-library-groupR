@@ -11,10 +11,10 @@ import org.hibernate.annotations.GenericGenerator;
 public class Audit implements Serializable {
 
 	static final int MAX_LENGTH_ID = 11;
-	static final int MAX_LENGTH_EVENT_NAME = 30;
-	static final int MAX_LENGTH_EVENT_ID = 30;
-	static final int MAX_LENGTH_LOGIN_NAME = 30;
-	static final int MAX_LENGTH_NOTES = 50;
+	static final int MAX_LENGTH_EVENT_NAME = 50;
+	static final int MAX_LENGTH_EVENT_ID = 50;
+	static final int MAX_LENGTH_LOGIN_NAME = 50;
+	static final int MAX_LENGTH_NOTES = 100;
 
 	@Id
 	@Column(name = "ID")

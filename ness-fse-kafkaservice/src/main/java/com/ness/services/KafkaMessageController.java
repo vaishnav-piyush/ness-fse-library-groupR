@@ -21,7 +21,7 @@ public class KafkaMessageController {
 	@Autowired
 	private KafkaProducer producer;
 	
-	@RequestMapping(value="audit", method = RequestMethod.POST)
+	@RequestMapping(value="/audit", method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)	
 	public void produce(@RequestBody AuditBO auditBO){
 		LOGGER.info("KafkaMessageController.produce() Entry"); 

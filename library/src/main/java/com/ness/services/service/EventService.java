@@ -1,10 +1,5 @@
 package com.ness.services.service;
 
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,12 +23,8 @@ public class EventService{
 		auditBO.setEventId(eventBO.getT().getId());
 		auditBO.setLoginName("FSEGroup");
 		auditBO.setNotes(getNotes(eventBO, eventType));
-		
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		Calendar calendar = Calendar.getInstance();
-		String date = dateFormat.format(calendar.getTime());
-		auditBO.setUpdateDate(dateFormat.parse(date));
 		LOGGER.info("EventService.raiseEvent() auditBO: " + auditBO.toString());
+		publishService.publishEvent(auditBO);
 		LOGGER.info("EventService.raiseEvent() Exit");
 	}
 	
@@ -51,5 +42,5 @@ public class EventService{
 			result = "Temp Notes";
 		}
 		return result;
-	}
+	}	
 }

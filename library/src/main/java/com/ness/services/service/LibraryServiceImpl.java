@@ -43,7 +43,9 @@ public class LibraryServiceImpl implements LibraryService {
         Book persisted = convertFromBO(bookBO);
         persisted = repository.save(persisted);
         LOGGER.info("Created a new Book entry with information: {}", persisted);
-        return convertToBO(persisted);
+        BookBO result = convertToBO(persisted);
+        raiseEvent(result,BookEventBO.EVENT_BOOK_ADDED);
+        return result;
     }
 
     @Override
@@ -52,7 +54,9 @@ public class LibraryServiceImpl implements LibraryService {
         Book deleted = findBookById(id);
         repository.delete(deleted);
         LOGGER.info("Deleted Book entry with informtation: {}", deleted);
-        return convertToBO(deleted);
+        BookBO result = convertToBO(deleted);
+        raiseEvent(result,BookEventBO.EVENT_BOOK_DELETED);
+        return result;
     }
 
     @Override
@@ -60,7 +64,9 @@ public class LibraryServiceImpl implements LibraryService {
         LOGGER.info("Finding all Book entries.");
         List<Book> todoEntries = repository.findAll();
         LOGGER.info("Found {} Book entries", todoEntries.size());
-        return convertToDTOs(todoEntries);
+        List<BookBO> result = convertToDTOs(todoEntries);
+        raiseEvent(result,BookEventBO.EVENT_BOOK_SEARCHED);
+        return result;
     }
 
     private List<BookBO> convertToDTOs(List<Book> models) {
@@ -72,7 +78,9 @@ public class LibraryServiceImpl implements LibraryService {
         LOGGER.info("Finding Book entry with id: {}", id);
         Book found = findBookById(id);
         LOGGER.info("Found Book entry: {}", found);
-        return convertToBO(found);
+        BookBO result = convertToBO(found);
+        raiseEvent(result,BookEventBO.EVENT_BOOK_SEARCHED);
+        return result;
     }
 
     @Override
@@ -84,7 +92,9 @@ public class LibraryServiceImpl implements LibraryService {
 				new Date());
         updated = repository.save(updated);
         LOGGER.info("Updated Book entry with information: {}", updated);
-        return convertToBO(updated);
+        BookBO result = convertToBO(updated);
+        raiseEvent(result,BookEventBO.EVENT_BOOK_UPDATED);
+        return result;
     }
 
     private Book findBookById(String id) throws Exception{
@@ -129,7 +139,21 @@ public class LibraryServiceImpl implements LibraryService {
     private void raiseEvent(BookBO bookBO, String eventType){
     	LOGGER.info("LibraryServiceImpl.raiseEvent(): Entry: About To Raise " + eventType + " For bookBO: " + bookBO.toString());
     	BookEventBO<BookBO> eventBO = new BookEventBO<BookBO>(bookBO);
-    	eventService.raiseEvent(eventBO, eventType);
+    	try {
+			eventService.raiseEvent(eventBO, eventType);
+		} catch (Exception e) {
+			LOGGER.info("LibraryServiceImpl.raiseEvent(): Exception While Raising Event " + eventType + " : Error Message: " + e.getMessage());
+			e.printStackTrace();
+		}
+    	LOGGER.info("LibraryServiceImpl.raiseEvent(): Exit: Event Raised");
+    }
+    
+    @Async
+    private void raiseEvent(List<BookBO> bookBO, String eventType){
+    	LOGGER.info("LibraryServiceImpl.raiseEvent(): Entry: About To Raise " + eventType + " For bookBO List: " + bookBO.toString());
+    	for (BookBO bookBO2 : bookBO) {
+    		raiseEvent(bookBO2, eventType);
+		}    	
     	LOGGER.info("LibraryServiceImpl.raiseEvent(): Exit: Event Raised");
     }
 }

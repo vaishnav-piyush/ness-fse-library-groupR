@@ -50,7 +50,8 @@ public class KafkaAuditServiceImpl implements KafkaAuditService {
 		audit.setEventName(auditBO.getEventName());
 		audit.setLoginName(auditBO.getLoginName());
 		audit.setNotes(auditBO.getNotes());
-		audit.setUpdatedDate(auditBO.getUpdateDate() != null ?auditBO.getUpdateDate(): new Date());
+		//audit.setUpdatedDate(auditBO.getUpdateDate() != null ?auditBO.getUpdateDate(): new Date());
+		audit.setUpdatedDate(new Date());
 		return audit;
 	}
 }

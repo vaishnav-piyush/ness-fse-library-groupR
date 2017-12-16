@@ -3,19 +3,23 @@
  */
 package com.ness.services.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author P7109857
  *
  */
-public class AuditBO {
+public class AuditBO implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String eventName;
 	private String eventId;
 	private String loginName;
-	private Date updateDate;
-    private String notes;
+	private String notes;
 
 	public String getEventName() {
 		return eventName;
@@ -41,14 +45,6 @@ public class AuditBO {
 		this.loginName = loginName;
 	}
 
-	public Date getUpdateDate() {
-		return updateDate;
-	}
-
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
-	}
-
 	public String getNotes() {
 		return notes;
 	}
@@ -59,7 +55,7 @@ public class AuditBO {
 
 	@Override
 	public String toString() {
-		return "AuditBO [eventName=" + eventName + ", eventId=" + eventId + ", loginName=" + loginName + ", updateDate="
-				+ updateDate + ", notes=" + notes + "]";
+		return "AuditBO [eventName=" + eventName + ", eventId=" + eventId + ", loginName=" + loginName + ", notes="
+				+ notes + "]";
 	}
 }

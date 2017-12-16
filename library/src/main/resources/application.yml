@@ -31,6 +31,8 @@ service:
           name: kafkamessageservice
           version: v1
           versionname: ${service.atomic.kafkaservice.name}_${service.atomic.kafkaservice.version}
+          enabled: true
+          url: kafka/audit
 ---
 spring:
   profiles: local
