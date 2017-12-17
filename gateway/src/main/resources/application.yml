@@ -91,9 +91,11 @@ spring:
   profiles: docker
  
 eureka:
+  instance:
+    preferIpAddress: true
   client:
     serviceUrl:
-      defaultZone: http://192.168.99.100:8761/eureka/
+      defaultZone: http://discovery:8761/eureka/
       
 gatewayserver:
   cors:

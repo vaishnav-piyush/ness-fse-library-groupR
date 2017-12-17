@@ -73,6 +73,26 @@
 					</execution>
 				</executions>
 			</plugin>
+			<!-- Docker Integration: Begin -->
+			<plugin>
+			    <groupId>com.spotify</groupId>
+			    <artifactId>docker-maven-plugin</artifactId>
+			    <version>0.4.10</version>
+			    <configuration>
+			        <imageName>fsegroup/${project.artifactId}</imageName>
+			        <dockerDirectory>${project.basedir}</dockerDirectory>
+			    </configuration>
+			    <executions>
+				    <execution>
+						<id>build-image</id>
+						<phase>package</phase>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- Docker Integration: End -->
 		</plugins>
 	</build>
 	

@@ -31,7 +31,7 @@ service:
           name: kafkamessageservice
           version: v1
           versionname: ${service.atomic.kafkaservice.name}_${service.atomic.kafkaservice.version}
-          enabled: true
+          enabled: false
           url: kafka/audit
 ---
 spring:
@@ -82,14 +82,16 @@ spring:
   profiles: docker
  
 eureka:
+  instance:
+    preferIpAddress: true
   client:
     serviceUrl:
-      defaultZone: http://192.168.99.100:8761/eureka/ 
+      defaultZone: http://discovery:8761/eureka/
 
 mongo:
   db:
-    user: test
-    password: test
+    user: fsegroup
+    password: fsegroup
     host: 192.168.99.100
     port: 27017
     database: test     

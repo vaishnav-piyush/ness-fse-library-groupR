@@ -1,0 +1,39 @@
+version: '3'
+services: 
+    mongo: 
+      image: fsegroup/ness-fse-mongo
+      ports:
+        - "27017:27017"      
+      environment:
+        MONGODB_ROOT_PASSWORD: root
+        MONGODB_USER: fsegroup
+        MONGODB_PASS: fsegroup
+    mysql: 
+      image: fsegroup/ness-fse-mysql
+      ports:
+        - "3306:3306"      
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: library
+        MYSQL_USER: fsegroup
+        MYSQL_PASSWORD: fsegroup
+    discovery:
+      image: fsegroup/ness-fse-registryservice
+      ports:
+        - "8761:8761"
+    gateway:
+      image: fsegroup/ness-fse-gatewayservice
+      ports:
+        - "8765:8765"
+      depends_on:
+        - discovery
+    library:
+      image: fsegroup/ness-fse-libraryservice      
+      depends_on:
+        - mongo
+        - gateway        
+    kafka:
+      image: fsegroup/ness-fse-kafkaservice      
+      depends_on:
+        - mysql
+        - gateway
