@@ -1,0 +1,32 @@
+[
+    { 
+        "userName": "Predeeps",
+        "firstName": "Pradeep",
+        "lastName": "Sarc",
+        "password": "secret",
+        "admin": true
+    },
+    { 
+        "userName": "Rohit",
+        "firstName": "Rohit",
+        "lastName": "Saxena",
+        "password": "secret",
+        "admin": true
+    }
+    ,
+    { 
+        "userName": "Rohit1",
+        "firstName": "Rohit",
+        "lastName": "Saxena",
+        "password": "secret",
+        "admin": true
+    }
+    ,
+    { 
+        "userName": "Rohit2",
+        "firstName": "Rohit",
+        "lastName": "Saxena",
+        "password": "secret",
+        "admin": true
+    }
+]
