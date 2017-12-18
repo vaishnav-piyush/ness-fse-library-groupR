@@ -5,7 +5,7 @@
 
 	<groupId>com.ness.services.authserver</groupId>
 	<artifactId>ness-fse-authserver</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
 	<name>ness-fse-authserver</name>
@@ -86,6 +86,26 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<!-- Docker Integration: Begin -->
+			<plugin>
+			    <groupId>com.spotify</groupId>
+			    <artifactId>docker-maven-plugin</artifactId>
+			    <version>0.4.10</version>
+			    <configuration>
+			        <imageName>fsegroup/${project.artifactId}</imageName>
+			        <dockerDirectory>${project.basedir}</dockerDirectory>
+			    </configuration>
+			    <executions>
+				    <execution>
+						<id>build-image</id>
+						<phase>package</phase>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- Docker Integration: End -->
 		</plugins>
 	</build>
 

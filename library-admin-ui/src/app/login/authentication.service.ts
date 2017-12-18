@@ -12,7 +12,8 @@ export class AuthenticationService {
   public refresh_token: string;
   private _clientId: string = 'trusted-app';
   private _clientSecret: string = 'secret';
-  private _urlGetToken = "http://localhost:9090/oauth/token"
+  //private _urlGetToken = "http://localhost:9090/oauth/token"
+  private _urlGetToken = "http://192.168.99.100:9090/oauth/token"
 
   constructor(private _http : HttpClient) {
     var currentUser = JSON.parse(localStorage.getItem("currentUser"));

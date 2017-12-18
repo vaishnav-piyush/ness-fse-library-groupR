@@ -10,7 +10,8 @@ import { HttpHeaders } from "@angular/common/http";
 
 @Injectable()
 export class AuditService {
-   private _urlGetAllAudits = 'http://localhost:8765/fse/aud/audit';
+   //private _urlGetAllAudits = 'http://localhost:8765/fse/aud/audit';
+   private _urlGetAllAudits = 'http://192.168.99.100:8765/fse/aud/audit';
 
   constructor(private _http : HttpClient) {}
 

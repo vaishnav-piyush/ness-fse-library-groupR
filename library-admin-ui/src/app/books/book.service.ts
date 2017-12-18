@@ -11,11 +11,17 @@ import { HttpHeaders } from "@angular/common/http";
 @Injectable()
 export class BookService {
   // private _urlGetAllBooks = '../testdata/all-books.json';
-  private _urlGetAllBooks = 'http://localhost:8765/fse/lib/book';
+  //private _urlGetAllBooks = 'http://localhost:8765/fse/lib/book';
+  //private _urlGetBookById = "../testdata/single-book.json";
+  //private _urlUpdateBook = "http://localhost:8765/fse/lib/book"
+  //private _urlCreateBook = "http://localhost:8765/fse/lib/book";
+  //private _urlDeleteBook = "http://localhost:8765/fse/lib/book";
+
+  private _urlGetAllBooks = 'http://192.168.99.100:8765/fse/lib/book';
   private _urlGetBookById = "../testdata/single-book.json";
-  private _urlUpdateBook = "http://localhost:8765/fse/lib/book"
-  private _urlCreateBook = "http://localhost:8765/fse/lib/book";
-  private _urlDeleteBook = "http://localhost:8765/fse/lib/book";
+  private _urlUpdateBook = "http://192.168.99.100:8765/fse/lib/book"
+  private _urlCreateBook = "http://192.168.99.100:8765/fse/lib/book";
+  private _urlDeleteBook = "http://192.168.99.100:8765/fse/lib/book";
 
   constructor(private _http : HttpClient) {
 

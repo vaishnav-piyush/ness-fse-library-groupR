@@ -89,6 +89,7 @@ public class UserServiceApplication extends ResourceServerConfigurerAdapter {
 		//			.antMatchers("/api/admin").hasRole("book_write")
 		// restricting all access to /api/** to authenticated users
 		.antMatchers("/user/**").authenticated();
+		/*.antMatchers("/user/**").permitAll();*/
 	}
 
 

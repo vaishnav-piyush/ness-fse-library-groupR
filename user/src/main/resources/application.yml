@@ -70,3 +70,25 @@ security:
     resource:
       userInfoUri: http://localhost:9090/services/user
 
+---
+spring:
+    profiles: docker
+    jpa:
+        database: MYSQL
+
+    datasource:
+        url: jdbc:mysql://192.168.99.100:3306/library
+        username: fsegroup
+        password: fsegroup
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    serviceUrl:
+      defaultZone: http://discovery:8761/eureka/
+
+security:
+  oauth2:
+    resource:
+      userInfoUri: http://localhost:9090/services/user
