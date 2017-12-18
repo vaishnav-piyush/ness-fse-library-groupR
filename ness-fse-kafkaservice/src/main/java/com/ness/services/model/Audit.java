@@ -7,14 +7,14 @@ import javax.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "AUDIT")
-public class AUDIT implements Serializable {
+@Table(name = "audit")
+public class Audit implements Serializable {
 
 	static final int MAX_LENGTH_ID = 11;
-	static final int MAX_LENGTH_EVENT_NAME = 30;
-	static final int MAX_LENGTH_EVENT_ID = 30;
-	static final int MAX_LENGTH_LOGIN_NAME = 30;
-	static final int MAX_LENGTH_NOTES = 50;
+	static final int MAX_LENGTH_EVENT_NAME = 50;
+	static final int MAX_LENGTH_EVENT_ID = 50;
+	static final int MAX_LENGTH_LOGIN_NAME = 50;
+	static final int MAX_LENGTH_NOTES = 100;
 
 	@Id
 	@Column(name = "ID")
@@ -58,7 +58,7 @@ public class AUDIT implements Serializable {
 	/**
 	 * 
 	 */
-	public AUDIT() {
+	public Audit() {
 		super();
 	}
 
@@ -112,8 +112,7 @@ public class AUDIT implements Serializable {
 
 	@Override
 	public String toString() {
-		return "AUDIT [id=" + id + ", eventName=" + eventName + ", eventId=" + eventId + ", loginName=" + loginName
+		return "Audit [id=" + id + ", eventName=" + eventName + ", eventId=" + eventId + ", loginName=" + loginName
 				+ ", updatedDate=" + updatedDate + ", notes=" + notes + "]";
 	}
-
 }
