@@ -11,6 +11,7 @@ import { UserFormComponent } from "./books/user-form.component";
 import { FormsModule } from "@angular/forms";
 import { NewBookComponent } from "./books/new-book.component";
 import {RegisterUserComponent} from "./user/register-user.component";
+import { ListAllUserComponent } from "./user/user-listall.component";
 import {UserService} from "./user/user.service";
 import {AuditComponent} from "./audit/audit-search.component";
 import {AuditService} from "./audit/audit.service";
@@ -28,6 +29,7 @@ import { AuthenticationService } from './login/authentication.service';
     RegisterUserComponent,
     AuditComponent,
     LoginComponent,
+    ListAllUserComponent
   ],
   imports: [
     BrowserModule,
