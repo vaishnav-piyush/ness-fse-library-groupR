@@ -29,7 +29,7 @@ public class AUDIT implements Serializable {
 	@Column(name = "LOGIN_NAME")
 	private String loginName;
 
-	@Column(name = "UPDATED_DATE")
+	@Column(name = "UPDATE_DATE")
 	private Date updatedDate;
 
 	@Column(name = "NOTES")
