@@ -1,39 +1,71 @@
 version: '3'
 services: 
     mongo: 
-      image: fsegroup/ness-fse-mongo
-      ports:
-        - "27017:27017"      
-      environment:
-        MONGODB_ROOT_PASSWORD: root
-        MONGODB_USER: fsegroup
-        MONGODB_PASS: fsegroup
+        image: fsegroup/ness-fse-mongo
+        container_name: mongo
+        volumes:
+            - mongo-data:/var/lib/mongo  
+        ports:
+            - "27017:27017"      
+        environment:
+            MONGODB_ROOT_PASSWORD: root
+            MONGODB_USER: fsegroup
+            MONGODB_PASS: fsegroup
     mysql: 
-      image: fsegroup/ness-fse-mysql
-      ports:
-        - "3306:3306"      
-      environment:
-        MYSQL_ROOT_PASSWORD: root
-        MYSQL_DATABASE: library
-        MYSQL_USER: fsegroup
-        MYSQL_PASSWORD: fsegroup
+        image: fsegroup/ness-fse-mysql
+        container_name: mysql
+        volumes:
+            - my-sql-data:/var/lib/mysql
+        ports:
+            - "3306:3306"      
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: library
+            MYSQL_USER: fsegroup
+            MYSQL_PASSWORD: fsegroup
     discovery:
-      image: fsegroup/ness-fse-registryservice
-      ports:
-        - "8761:8761"
+        image: fsegroup/ness-fse-registryservice
+        container_name: discovery
+        ports:
+            - "8761:8761"
     gateway:
-      image: fsegroup/ness-fse-gatewayservice
-      ports:
-        - "8765:8765"
-      depends_on:
-        - discovery
+        image: fsegroup/ness-fse-gatewayservice
+        container_name: gateway
+        ports:
+            - "8765:8765"
+        depends_on:
+            - discovery
     library:
-      image: fsegroup/ness-fse-libraryservice      
-      depends_on:
-        - mongo
-        - gateway        
-    kafka:
-      image: fsegroup/ness-fse-kafkaservice      
-      depends_on:
-        - mysql
-        - gateway
+        image: fsegroup/ness-fse-libraryservice
+        container_name: library   
+        depends_on:
+            - mongo
+            - gateway
+    user:
+        image: fsegroup/ness-fse-userservice
+        container_name: user
+        depends_on:
+            - mysql
+            - gateway 
+    authserver:
+        image: fsegroup/ness-fse-authserver
+        container_name: authserver
+        ports:
+            - "9092:9092"
+        depends_on:
+            - mysql
+            - gateway   
+    audit:
+        image: fsegroup/ness-fse-auditservice
+        container_name: audit
+        depends_on:
+            - mysql
+            - gateway           
+#  kafka:
+#    image: fsegroup/ness-fse-kafkaservice      
+#    depends_on:
+#      - mysql
+#      - gateway
+volumes:
+    my-sql-data:
+    mongo-data:

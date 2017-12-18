@@ -80,7 +80,6 @@ public class UserServiceApplication extends ResourceServerConfigurerAdapter {
 	public void configure(HttpSecurity http) throws Exception {
 		http
 		.csrf().disable()
-		.anonymous().disable()
 		.authorizeRequests()
 		.antMatchers(HttpMethod.OPTIONS).permitAll()
 		// when restricting access to 'Roles' you must remove the "ROLE_" part role
@@ -88,7 +87,9 @@ public class UserServiceApplication extends ResourceServerConfigurerAdapter {
 		//			.antMatchers("/api/hello").access("hasAnyRole('book_read')")          
 		//			.antMatchers("/api/admin").hasRole("book_write")
 		// restricting all access to /api/** to authenticated users
-		.antMatchers("/user/**").authenticated();
+//		.antMatchers("/user/**").authenticated();
+				.antMatchers("/user/**").permitAll();
+
 	}
 
 

@@ -92,11 +92,11 @@ mongo:
   db:
     user: fsegroup
     password: fsegroup
-    host: 192.168.99.100
+    host: 127.0.0.1
     port: 27017
     database: test     
     
 security:
   oauth2:
     resource:
-      userInfoUri: http://192.168.99.100:9090/services/user
+      userInfoUri: http://172.18.0.2:9090/services/user

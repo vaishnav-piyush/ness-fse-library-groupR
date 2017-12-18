@@ -31,7 +31,7 @@ public class UserController
     @Autowired
     private UserService service;
     
-    @PreAuthorize("hasRole('user_write')")
+   // @PreAuthorize("hasRole('user_write')")
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public UserDTO createUser(@RequestBody @Valid UserDTO userDto) {
@@ -41,7 +41,7 @@ public class UserController
         return created;
     }
 
-    @PreAuthorize("hasRole('user_read')")
+   // @PreAuthorize("hasRole('user_read')")
     @RequestMapping(method = RequestMethod.GET)
     public List<UserDTO> getAllUsers() {
         return service.getAllUsers();

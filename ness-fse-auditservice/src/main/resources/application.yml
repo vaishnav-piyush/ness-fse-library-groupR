@@ -73,17 +73,19 @@ spring:
   profiles: docker
  
 eureka:
+  instance:
+    preferIpAddress: true
   client:
     serviceUrl:
-      defaultZone: http://192.168.99.100:8761/eureka/ 
+      defaultZone: http://discovery:8761/eureka/
 
 datasource:
         driver: com.mysql.jdbc.Driver
-        url: jdbc:mysql://192.168.99.100:3306/library
+        url: jdbc:mysql://127.0.0.1:3306/library
         username: fsegroup
         password: fsegroup
 
 security:
   oauth2:
     resource:
-      userInfoUri: http://192.168.99.100:9090/services/user
+      userInfoUri: http://172.18.0.2:9090/services/user

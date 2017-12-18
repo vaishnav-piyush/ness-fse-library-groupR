@@ -93,12 +93,13 @@ spring:
   jpa:
       database: MYSQL
   datasource:
-      driver: com.mysql.jdbc.Driver
-      url: jdbc:mysql://192.168.99.100:3306/library
+      url: jdbc:mysql://127.0.0.1:3306/library
       username: fsegroup
       password: fsegroup
 
 eureka:
+  instance:
+    preferIpAddress: true
   client:
     serviceUrl:
-      defaultZone: http://192.168.99.100:8761/eureka/          
+      defaultZone: http://discovery:8761/eureka/
