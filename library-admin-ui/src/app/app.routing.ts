@@ -18,7 +18,7 @@ const appRoutings : Routes = [
     { path: 'new-book', component: NewBookComponent, canActivate: [AuthGuard] },
     { path: 'register-user', component: RegisterUserComponent, canActivate: [AuthGuard] },
     { path: 'audit', component: AuditComponent, canActivate: [AuthGuard] },
-    { path: 'users', component: ListAllUserComponent }
+    { path: 'users', component: ListAllUserComponent, canActivate: [AuthGuard] }
 ]
 
 export const AppRoutes:ModuleWithProviders = RouterModule.forRoot(appRoutings);
