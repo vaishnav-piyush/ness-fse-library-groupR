@@ -47,12 +47,6 @@ services:
         depends_on:
             - mongo
             - gateway
-    audit:
-        image: fsegroup/ness-fse-auditservice
-        container_name: audit
-        depends_on:
-            - mysql
-            - gateway
     authserver:
         image: fsegroup/ness-fse-authserver
         container_name: authserver
