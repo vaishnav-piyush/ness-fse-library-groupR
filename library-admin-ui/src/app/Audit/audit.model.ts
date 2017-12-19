@@ -4,5 +4,5 @@ export class Audit {
     event_id: string;
     login_name: string;
     notes: string;
-    updatedDate: Date;
+    updat_date: Date;
 }

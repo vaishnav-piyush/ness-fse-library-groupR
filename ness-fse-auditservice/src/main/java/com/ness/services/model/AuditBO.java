@@ -7,6 +7,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class AuditBO implements Serializable {
 	
 	@NotEmpty
@@ -26,6 +28,7 @@ public class AuditBO implements Serializable {
     @Size(max = AUDIT.MAX_LENGTH_LOGIN_NAME)
 	private String login_name;
 	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm a z")
     private Date update_date;
     
     @Size(max = AUDIT.MAX_LENGTH_NOTES)
