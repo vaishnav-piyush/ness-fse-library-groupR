@@ -29,7 +29,7 @@ security:
 spring:
   profiles: local
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: 127.0.0.1:9092
     consumer:
       group-id: test-consumer-group
     template:
@@ -51,6 +51,10 @@ security:
   oauth2:
     resource:
       userInfoUri: http://localhost:9090/services/user
+
+logging:
+  level:
+    org.apache.kafka: INFO
 
 ---
 spring:
